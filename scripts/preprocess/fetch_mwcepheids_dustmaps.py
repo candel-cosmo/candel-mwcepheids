@@ -20,7 +20,7 @@ try:
 except ModuleNotFoundError:
     import tomli as tomllib
 
-from candel.util import CANDEL_ROOT as REPO_ROOT  # noqa: E402
+from candel.util import CANDEL_ROOT as REPO_ROOT, data_path  # noqa: E402
 
 SUPPORTED_MAPS = {
     "bayestar19": {
@@ -72,7 +72,7 @@ def main():
     local = load_local_config(args.local_config)
     dustmaps_dir = local.get("paths", {}).get("dustmaps")
     if dustmaps_dir is None:
-        dustmaps_dir = REPO_ROOT / "data" / "MWCepheids" / "dustmaps"
+        dustmaps_dir = Path(data_path("data", "MWCepheids", "dustmaps"))
     else:
         dustmaps_dir = Path(dustmaps_dir)
 

@@ -11,13 +11,15 @@ is the precision matrix) so the posterior is an isotropic unit Gaussian,
 which emcee's stretch move samples efficiently.
 """
 
+from pathlib import Path
+
 import emcee
 import numpy as np
 from astropy.io import fits
 from scipy.linalg import cho_factor, cho_solve
 
-from candel.util import CANDEL_ROOT as REPO_ROOT  # noqa: E402
-DATA_DIR = REPO_ROOT / "data" / "MWCepheids" / "SH0ES_H0"
+from candel.util import data_path  # noqa: E402
+DATA_DIR = Path(data_path("data", "MWCepheids", "SH0ES_H0"))
 N_PARAMS = 47
 
 

@@ -14,13 +14,13 @@ import scienceplots  # noqa: E402, F401
 from scipy.stats import pearsonr  # noqa: E402
 
 from candel import load_config  # noqa: E402
-from candel.util import CANDEL_ROOT  # noqa: E402
+from candel.util import results_path  # noqa: E402
 from candel_mwcepheids import CepheidData, to_mwcepheids_config  # noqa: E402
 
 importlib.reload(scienceplots)
 
-SAMPLES_PATH = os.path.join(
-    CANDEL_ROOT, "results", "R21", "C22+C27_anc-NGC4258", "samples.hdf5")
+SAMPLES_PATH = results_path(
+    "results", "R21", "C22+C27_anc-NGC4258", "samples.hdf5")
 
 
 def load_posterior_means(path):

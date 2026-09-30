@@ -18,6 +18,7 @@ H0 is recovered as: H0 = 10^(q[46] / 5).
 """
 import argparse
 import warnings
+from pathlib import Path
 
 import corner
 import h5py
@@ -36,9 +37,9 @@ warnings.filterwarnings("ignore", module="arviz")
 
 # ── data loading ──────────────────────────────────────────────────────
 
-from candel.util import CANDEL_ROOT as REPO_ROOT  # noqa: E402
-DATA_DIR = REPO_ROOT / "data" / "MWCepheids" / "SH0ES_H0"
-RESULTS_DIR = REPO_ROOT / "results" / "MWCepheids"
+from candel.util import data_path, results_path  # noqa: E402
+DATA_DIR = Path(data_path("data", "MWCepheids", "SH0ES_H0"))
+RESULTS_DIR = Path(results_path("results", "MWCepheids"))
 
 FIXED_IDX = 44
 FIXED_VAL = 0.0

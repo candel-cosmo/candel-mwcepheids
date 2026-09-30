@@ -28,11 +28,6 @@ COL_GROUND_ZP = 45
 B_W_FID = -3.285
 
 
-def _default_repo_root():
-    from candel.util import CANDEL_ROOT
-    return CANDEL_ROOT
-
-
 def _load_deltaq(path):
     if not path.exists():
         return {}
@@ -137,15 +132,15 @@ def generate(shoes_dir, out_dir):
 
 
 def main():
-    repo = _default_repo_root()
+    from candel.util import data_path
     parser = ArgumentParser()
     parser.add_argument(
         "--shoes-dir", type=Path,
-        default=repo / "data" / "SH0ES",
+        default=Path(data_path("data", "SH0ES")),
         help="Directory containing the raw SH0ES FITS files.")
     parser.add_argument(
         "--out-dir", type=Path,
-        default=repo / "data" / "MWCepheids",
+        default=Path(data_path("data", "MWCepheids")),
         help="Directory where MW-Cepheid anchor products are written.")
     args = parser.parse_args()
 

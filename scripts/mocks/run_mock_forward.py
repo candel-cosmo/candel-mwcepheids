@@ -31,8 +31,8 @@ from candel.inference import run_inference
 from candel_mwcepheids import MWCepheidModel
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-from candel.util import CANDEL_ROOT as REPO_ROOT  # noqa: E402
-DEFAULT_OUTDIR = REPO_ROOT / "results" / "MWCepheids" / "mocks"
+from candel.util import results_path  # noqa: E402
+DEFAULT_OUTDIR = Path(results_path("results", "MWCepheids", "mocks"))
 
 ALL_TASKS = {
     "C22": ("C22", SCRIPT_DIR / "config_mock_mW.toml", MOCK_CFG_MW),

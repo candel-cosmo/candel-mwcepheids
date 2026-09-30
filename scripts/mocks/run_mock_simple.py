@@ -17,6 +17,7 @@ import sys
 import time
 import traceback
 from datetime import datetime
+from pathlib import Path
 
 import mock_utils
 import numpy as np
@@ -25,8 +26,8 @@ from mock_utils import (DEFAULT_CONFIGS, SIMPLE_TASKS, TRUE_VALS,
                         run_one_mock)
 from mpi4py import MPI
 
-from candel.util import CANDEL_ROOT as REPO_ROOT  # noqa: E402
-DEFAULT_OUTDIR = REPO_ROOT / "results" / "MWCepheids" / "mocks"
+from candel.util import results_path  # noqa: E402
+DEFAULT_OUTDIR = Path(results_path("results", "MWCepheids", "mocks"))
 
 TAG_WORK = 1
 TAG_RESULT = 2

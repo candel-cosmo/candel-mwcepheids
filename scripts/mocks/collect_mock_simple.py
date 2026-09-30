@@ -8,14 +8,15 @@ Usage:
 """
 import argparse
 import os
+from pathlib import Path
 
 import mock_utils
 import numpy as np
 from mock_utils import (SIMPLE_TASKS, TRUE_VALS, likelihood_label,
                         parse_likelihood, print_bias_table)
 
-from candel.util import CANDEL_ROOT as REPO_ROOT  # noqa: E402
-DEFAULT_OUTDIR = REPO_ROOT / "results" / "MWCepheids" / "mocks"
+from candel.util import results_path  # noqa: E402
+DEFAULT_OUTDIR = Path(results_path("results", "MWCepheids", "mocks"))
 
 
 def main():

@@ -7,8 +7,8 @@ import urllib.request
 from pathlib import Path
 
 URL = "https://www.astro.utoronto.ca/DDO/research/cepheids/table_positons.html"
-from candel.util import CANDEL_ROOT as REPO_ROOT  # noqa: E402
-DEFAULT_OUTPUT = REPO_ROOT / "data" / "MWCepheids" / "ddo_cepheid_positions.csv"  # noqa: E501
+from candel.util import data_path  # noqa: E402
+DEFAULT_OUTPUT = Path(data_path("data", "MWCepheids", "ddo_cepheid_positions.csv"))  # noqa: E501
 
 
 def main():
