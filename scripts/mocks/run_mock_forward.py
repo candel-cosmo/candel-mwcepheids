@@ -8,7 +8,7 @@ Rank 0 is the master that distributes seeds; ranks 1..N are workers
 that each JIT-compile once and reuse the cache for all subsequent mocks.
 
 Usage:
-    mpirun -np 28 python scripts/runs/mwcepheids/mocks/run_mock_forward.py \
+    mpirun -np 28 python packages/candel-mwcepheids/scripts/mocks/run_mock_forward.py \
         --n-mocks 1000 --campaigns C22 C27
 """
 import argparse
@@ -27,8 +27,8 @@ from mock_forward_utils import MOCK_CFG_MW, MOCK_CFG_PI, generate_mock_forward
 from mock_utils import TRUE_PARAMS
 from mpi4py import MPI
 
-from candel.inference import run_MWCepheids_inference
-from candel.model import MWCepheidModel
+from candel.inference import run_inference
+from candel_mwcepheids import MWCepheidModel
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -64,7 +64,7 @@ def run_one_mock_forward(seed, campaign, toml_path, mock_cfg,
     data, n_parent, n_sel = generate_mock_forward(
         seed, true_params, mock_cfg, campaign)
 
-    mw_log = logging.getLogger("candel.model.mwcepheids")
+    mw_log = logging.getLogger("candel_mwcepheids")
     prev_level = mw_log.level
     if quiet:
         mw_log.setLevel(logging.ERROR)
@@ -79,7 +79,7 @@ def run_one_mock_forward(seed, campaign, toml_path, mock_cfg,
             mock_cfg["logP_min"])
 
     model = MWCepheidModel(config, data)
-    mcmc, samples = run_MWCepheids_inference(
+    mcmc, samples = run_inference(
         model, print_summary=not quiet, save_samples=False,
         progress_bar=not quiet, return_mcmc=True)
     mw_log.setLevel(prev_level)

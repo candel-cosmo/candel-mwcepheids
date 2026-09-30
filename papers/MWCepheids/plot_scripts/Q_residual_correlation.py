@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """Correlate R21 (no-Q) magnitude residuals with the Q index."""
 import os
-import sys
 
-REPO_ROOT = os.path.abspath(
+PACKAGE_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-sys.path.insert(0, REPO_ROOT)
 
 import importlib  # noqa: E402
 
@@ -16,7 +14,7 @@ import scienceplots  # noqa: E402, F401
 from scipy.stats import pearsonr  # noqa: E402
 
 from candel import load_config  # noqa: E402
-from candel.pvdata import CepheidData, to_mwcepheids_config  # noqa: E402
+from candel_mwcepheids import CepheidData, to_mwcepheids_config  # noqa: E402
 
 importlib.reload(scienceplots)
 
@@ -33,7 +31,7 @@ def load_posterior_means(path):
 def main():
     # Load config and data
     config_path = os.path.join(
-        REPO_ROOT, "scripts", "runs", "configs", "config_MWCepheids.toml")
+        PACKAGE_ROOT, "configs", "config_MWCepheids.toml")
     config = to_mwcepheids_config(
         load_config(config_path, replace_los_prior=False))
 

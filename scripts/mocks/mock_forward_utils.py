@@ -7,7 +7,7 @@ MWCepheidModel.
 import numpy as np
 from mock_utils import DEFAULT_CONFIGS, generate_one_campaign
 
-from candel.pvdata.mwcepheids import CepheidData
+from candel_mwcepheids.data import CepheidData
 
 # Forward-model campaign configs (references to DEFAULT_CONFIGS)
 MOCK_CFG_MW = DEFAULT_CONFIGS["C22"]

@@ -4,7 +4,7 @@
 Run this after the individual mock runs have finished.
 
 Usage:
-    python scripts/runs/mwcepheids/mocks/collect_mock_simple.py
+    python packages/candel-mwcepheids/scripts/mocks/collect_mock_simple.py
 """
 import argparse
 import os

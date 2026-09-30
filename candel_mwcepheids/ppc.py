@@ -1,17 +1,5 @@
 # Copyright (C) 2026 Richard Stiskalek
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation; either version 3 of the License, or (at your
-# option) any later version.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
-# Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program; if not, write to the Free Software Foundation, Inc.,
-# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Licensed under the MIT License; see LICENSE in the repository root.
 """Posterior predictive check generation for MW Cepheids."""
 import logging
 import os
@@ -19,8 +7,8 @@ import os
 import numpy as np
 from tqdm.auto import tqdm
 
-from ..model.mwcepheids.selection import C22SelectionConfig, C27SelectionConfig
-from ..pvdata.dust import postprocess_extinction_profiles
+from .selection import C22SelectionConfig, C27SelectionConfig
+from candel.field.dust import postprocess_extinction_profiles
 
 logger = logging.getLogger(__name__)
 

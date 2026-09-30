@@ -1,17 +1,5 @@
 # Copyright (C) 2026 Richard Stiskalek
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation; either version 3 of the License, or (at your
-# option) any later version.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
-# Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program; if not, write to the Free Software Foundation, Inc.,
-# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Licensed under the MIT License; see LICENSE in the repository root.
 """Forward model for MW Cepheid parallax calibration."""
 import jax
 import jax.numpy as jnp
@@ -19,7 +7,8 @@ import numpyro
 from jax.scipy.special import log_ndtr
 from numpyro import distributions as dist
 
-from ..utils import DistanceModulusPrior, get_named_or_shared, sample_prior
+from candel.model.utils import (DistanceModulusPrior, get_named_or_shared,
+                                sample_prior)
 from .distance_marg import log_likelihood_marg_distance
 from .distributions import DiskPrior
 from .model_setup import ModelSetupMixin
@@ -93,6 +82,13 @@ class MWCepheidModel(ModelSetupMixin):
 
     def __init__(self, config, data):
         self._init_setup(config, data)
+
+    def n_data(self, model_kwargs):
+        """Data count for the information criteria."""
+        ndata = sum(2 * data.n_stars for data in self.data.values())
+        ndata += sum(anchor.n_stars + 1
+                     for anchor in self.anchor_data.values())
+        return max(int(ndata), 1)
 
     def __call__(self):
         if self.model_type == "R21":

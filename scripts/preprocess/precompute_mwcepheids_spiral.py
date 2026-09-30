@@ -12,9 +12,9 @@ Otherwise, random sightlines are generated with the same seed and bounds
 as the model would use.
 
 Usage:
-    python scripts/preprocess/MWCepheids/precompute_mwcepheids_spiral.py
-    python scripts/preprocess/MWCepheids/precompute_mwcepheids_spiral.py \
-        --config scripts/runs/configs/config_MWCepheids.toml
+    python packages/candel-mwcepheids/scripts/preprocess/precompute_mwcepheids_spiral.py
+    python packages/candel-mwcepheids/scripts/preprocess/precompute_mwcepheids_spiral.py \
+        --config packages/candel-mwcepheids/configs/config_MWCepheids.toml
 """
 import argparse
 import os
@@ -23,10 +23,9 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-from candel.model.mwcepheids import (compute_dist_sq_per_arm,
-                                     get_drimmel_arm_traces,
-                                     sample_disk_sightlines)
-from candel.pvdata import CepheidData, to_mwcepheids_config
+from candel_mwcepheids import (compute_dist_sq_per_arm,
+                               get_drimmel_arm_traces, sample_disk_sightlines)
+from candel_mwcepheids import CepheidData, to_mwcepheids_config
 from candel.util import load_config
 
 
@@ -229,8 +228,7 @@ def plot_sightlines(ell_dw, b_dw, ell_min, ell_max, b_min, b_max,
 def main():
     parser = argparse.ArgumentParser(
         description="Precompute per-arm squared-distance profiles.")
-    repo_root = Path(__file__).resolve().parents[3]
-    default_config = repo_root / "scripts" / "runs" / "configs" / (
+    default_config = Path(__file__).resolve().parents[2] / "configs" / (
         "config_MWCepheids.toml")
     parser.add_argument("--config", default=default_config,
                         type=Path, help="Path to CANDEL run config TOML file.")

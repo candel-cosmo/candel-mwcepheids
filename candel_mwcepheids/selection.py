@@ -1,17 +1,5 @@
 # Copyright (C) 2026 Richard Stiskalek
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation; either version 3 of the License, or (at your
-# option) any later version.
-#
-# This program is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
-# Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program; if not, write to the Free Software Foundation, Inc.,
-# 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# Licensed under the MIT License; see LICENSE in the repository root.
 """Selection function configuration and utilities."""
 from dataclasses import dataclass, field
 from typing import Optional
@@ -22,8 +10,8 @@ import numpy as np
 import numpyro
 from jax.scipy.special import log_ndtr, logsumexp, ndtr
 
-from ..integration import ln_simpson_uniform
-from ..utils import get_named_or_shared, load_priors, sample_prior
+from candel.model.integration import ln_simpson_uniform
+from candel.model.utils import get_named_or_shared, load_priors, sample_prior
 
 # Gauss-Legendre nodes/weights for bivariate normal CDF quadrature
 _GL_NODES_16, _GL_WEIGHTS_16 = np.polynomial.legendre.leggauss(16)

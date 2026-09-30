@@ -5,7 +5,7 @@ Runs all campaign/likelihood combinations and prints a summary table.
 Rank 0 is the master that distributes seeds; ranks 1..N are workers.
 
 Usage:
-    mpirun -np 28 python scripts/runs/mwcepheids/mocks/run_mock_simple.py \
+    mpirun -np 28 python packages/candel-mwcepheids/scripts/mocks/run_mock_simple.py \
         --n-mocks 1000 \
         --campaign C22 --likelihood gaussian
 """

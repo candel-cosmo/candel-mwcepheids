@@ -7,9 +7,9 @@ loads at init time. Run this once (or when config changes) to avoid
 querying the dust map during model setup.
 
 Usage:
-    python scripts/preprocess/MWCepheids/precompute_mwcepheids_extinction.py
-    python scripts/preprocess/MWCepheids/precompute_mwcepheids_extinction.py \
-        --config scripts/runs/configs/config_MWCepheids.toml
+    python packages/candel-mwcepheids/scripts/preprocess/precompute_mwcepheids_extinction.py
+    python packages/candel-mwcepheids/scripts/preprocess/precompute_mwcepheids_extinction.py \
+        --config packages/candel-mwcepheids/configs/config_MWCepheids.toml
 """
 import argparse
 import os
@@ -19,8 +19,9 @@ import jax.numpy as jnp
 import matplotlib.pyplot as plt
 import numpy as np
 
-from candel.model.mwcepheids import sample_disk_sightlines
-from candel.pvdata import CepheidData, query_AH_grid, to_mwcepheids_config
+from candel_mwcepheids import sample_disk_sightlines
+from candel.field.dust import query_AH_grid
+from candel_mwcepheids import CepheidData, to_mwcepheids_config
 from candel.util import load_config
 
 
@@ -162,8 +163,7 @@ def plot_sightlines(ell_dw, b_dw, ell_min, ell_max, b_min, b_max,
 def main():
     parser = argparse.ArgumentParser(
         description="Precompute A_H extinction grids for the forward model.")
-    repo_root = Path(__file__).resolve().parents[3]
-    default_config = repo_root / "scripts" / "runs" / "configs" / (
+    default_config = Path(__file__).resolve().parents[2] / "configs" / (
         "config_MWCepheids.toml")
     parser.add_argument("--config", default=default_config,
                         type=Path, help="Path to CANDEL run config TOML file.")

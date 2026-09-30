@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 """Plot MW Cepheid sample in Galactocentric projections (face-on + edge-on)."""
 import os
-import sys
 
-REPO_ROOT = os.path.abspath(
+PACKAGE_ROOT = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-sys.path.insert(0, REPO_ROOT)
 
 import importlib  # noqa: E402
 
@@ -14,8 +12,8 @@ import numpy as np  # noqa: E402
 import scienceplots  # noqa: E402, F401
 
 from candel import load_config  # noqa: E402
-from candel.model.mwcepheids import get_drimmel_arm_traces  # noqa: E402
-from candel.pvdata import CepheidData, to_mwcepheids_config  # noqa: E402
+from candel_mwcepheids import get_drimmel_arm_traces  # noqa: E402
+from candel_mwcepheids import CepheidData, to_mwcepheids_config  # noqa: E402
 
 importlib.reload(scienceplots)
 
@@ -25,7 +23,7 @@ R_SUN = 8.122      # Solar Galactocentric distance [kpc]
 
 def main():
     config_path = os.path.join(
-        REPO_ROOT, "scripts", "runs", "configs", "config_MWCepheids.toml")
+        PACKAGE_ROOT, "configs", "config_MWCepheids.toml")
     config = to_mwcepheids_config(
         load_config(config_path, replace_los_prior=False))
 
